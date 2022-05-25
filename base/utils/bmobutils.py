@@ -30,7 +30,7 @@ def add_proxy(proxy:UseProxy) -> None:
     if not data or len(data) == 0:
         bmob.insert(classname, proxy.dict())
     else:
-        bmob.update(classname, data['objectId'], proxy.dict())
+        bmob.update(classname, data[0]['objectId'], proxy.dict())
 
 
 def delete_proxy(proxy:UseProxy) -> None:
@@ -39,7 +39,7 @@ def delete_proxy(proxy:UseProxy) -> None:
     logi(data)
     logi(len(data))
     if not data or len(data) > 0:
-        bmob.remove(classname, data['objectId'])
+        bmob.remove(classname, data[0]['objectId'])
 
 
 def find_proxy() -> List[UseProxy]:
