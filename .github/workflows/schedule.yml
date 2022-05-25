@@ -1,14 +1,8 @@
 name: Crawler Proxy Pool
 on:
-  release:
-    types:
-      - published
   pull_request:
     types:
       - closed
-  push:
-    branches:
-      - release
   schedule:
     - cron: '0 * * * *'
 
