@@ -1,5 +1,8 @@
 name: Verify Proxy Pool
 on:
+  release:
+    types:
+      - published
   schedule:
     - cron: '0,15,30,45 * * * *'
 
