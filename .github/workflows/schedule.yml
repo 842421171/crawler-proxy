@@ -1,0 +1,25 @@
+name: Crawler Proxy Pool
+on:
+  schedule:
+    - cron: '*/60 * * * *'
+
+jobs:
+  run:
+    name: Crawler Proxy Pool
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ secrets.BRANCH }}
+      - name: Setup python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+      - name: Install Packages
+        run: pip install -r requirements.txt
+      - name: Run Script
+        env:
+          application_id: ${{APPLICATION_ID}}
+          rest_key: ${{REST_KEY}}
+        run: python main_crawler.py
