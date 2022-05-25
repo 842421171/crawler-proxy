@@ -3,6 +3,12 @@ on:
   release:
     types:
       - published
+  pull_request:
+    types:
+      - closed
+  push:
+    branches:
+      - release
   schedule:
     - cron: '0,15,30,45 * * * *'
 
