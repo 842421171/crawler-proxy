@@ -24,9 +24,7 @@ classname = 'use_proxy'
 def add_proxy(proxy:UseProxy) -> None:
     res = bmob.find(classname, where=proxy.dict())
     data = res.jsonData.get('results')
-    logi(res.jsonData)
     logi(data)
-    logi(len(data))
     if not data or len(data) == 0:
         bmob.insert(classname, proxy.dict())
     else:
@@ -37,13 +35,15 @@ def delete_proxy(proxy:UseProxy) -> None:
     res = bmob.find(classname, where=proxy.dict())
     data = res.jsonData.get('results')
     logi(data)
-    logi(len(data))
     if not data or len(data) > 0:
         bmob.remove(classname, data[0]['objectId'])
 
 
-def find_proxy() -> List[UseProxy]:
-    res = bmob.find(classname)
+def find_proxy(proxy:UseProxy = None) -> List[UseProxy]:
+    if proxy:
+        res = bmob.find(classname, where=proxy)
+    else:
+        res = bmob.find(classname)
     data = res.jsonData.get('results')
     proxy_list = []
     if not data:

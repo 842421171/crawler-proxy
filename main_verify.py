@@ -12,9 +12,13 @@ from verify import *
 from base import *
 
 proxies = find_proxy()
+use_proxy_list = []
 
 for proxy in proxies:
     if verify_ip_validity(proxy):
         add_proxy(proxy)
+        use_proxy_list.append(proxy)
     else:
         delete_proxy(proxy)
+
+print(use_proxy_list)
