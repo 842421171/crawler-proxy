@@ -1,11 +1,14 @@
 name: Crawler Proxy Pool
 on:
+  pull_request:
+    types:
+      - closed
   schedule:
     - cron: '*/60 * * * *'
 
 jobs:
-  run:
-    name: Crawler Proxy Pool
+  job1:
+    name: Crawler Proxy Pool - YunDaili
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -22,4 +25,23 @@ jobs:
         env:
           application_id: ${{APPLICATION_ID}}
           rest_key: ${{REST_KEY}}
-        run: python main_crawler.py
+        run: python main_crawler_yundaili.py
+  job2:
+    name: Crawler Proxy Pool - YunDailiFree
+    runs-on: ubuntu-latest
+    steps:
+        - name: Checkout
+          uses: actions/checkout@v2
+          with:
+            ref: ${{ secrets.BRANCH }}
+          - name: Setup python
+            uses: actions/setup-python@v2
+            with:
+              python-version: '3.8'
+          - name: Install Packages
+            run: pip install -r requirements.txt
+          - name: Run Script
+            env:
+              application_id: ${{APPLICATION_ID}}
+              rest_key: ${{REST_KEY}}
+            run: python main_crawler_yundaili.py

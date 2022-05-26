@@ -1,5 +1,8 @@
 name: Verify Proxy Pool
 on:
+  pull_request:
+    types:
+      - closed
   schedule:
     - cron: '*/15 * * * *'
 
