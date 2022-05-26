@@ -23,8 +23,8 @@ jobs:
         run: pip install -r requirements.txt
       - name: Run Script
         env:
-          application_id: ${{APPLICATION_ID}}
-          rest_key: ${{REST_KEY}}
+          application_id: ${{ secrets.APPLICATION_ID }}
+          rest_key: ${{ secrets.REST_KEY }}
         run: python main_crawler_yundaili.py
   yundaili_free:
     name: Crawler Proxy Pool - YunDailiFree
@@ -42,6 +42,6 @@ jobs:
         run: pip install -r requirements.txt
       - name: Run Script
         env:
-          application_id: ${{APPLICATION_ID}}
-          rest_key: ${{REST_KEY}}
+          application_id: ${{ secrets.APPLICATION_ID }}
+          rest_key: ${{ secrets.REST_KEY }}
         run: python main_crawler_yundaili.py
