@@ -39,7 +39,7 @@ def parse_and_verify(html: str) -> bool | None:
     ports = [port.get_text() for port in port_elements]
     protocol_types = [protocol_type.get_text() for protocol_type in protocol_type_elements]
 
-    if len(ips):
+    if not len(ips):
         return True
 
     for ip, port, protocol_type in zip(ips, ports, protocol_types):
