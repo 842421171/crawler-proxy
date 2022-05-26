@@ -44,4 +44,4 @@ jobs:
         env:
           application_id: ${{ secrets.APPLICATION_ID }}
           rest_key: ${{ secrets.REST_KEY }}
-        run: python main_crawler_yundaili.py
+        run: python main_crawler_yundailifree.py
