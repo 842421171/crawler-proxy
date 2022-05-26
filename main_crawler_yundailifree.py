@@ -11,6 +11,7 @@ version: 1.0
 from base import *
 from crawler import *
 
-proxies = find_proxy()
+proxy = UseProxy(protocol='HTTP')
+proxies = find_proxy(proxy)
 
 YunDaiLiFree().crawler(proxies)
