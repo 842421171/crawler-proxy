@@ -1,4 +1,4 @@
-name: Crawler Proxy Pool
+name: Crawler Proxy Pool (Hour)
 on:
   pull_request:
     types:
@@ -27,7 +27,9 @@ jobs:
         env:
           application_id: ${{ secrets.APPLICATION_ID }}
           rest_key: ${{ secrets.REST_KEY }}
-        run: python main_crawler_yundaili.py
+          target: 'yundaili'
+          protocol: 'HTTP'
+        run: python main_crawler.py
   yundaili_free:
     name: Crawler Proxy Pool - YunDailiFree
     runs-on: ubuntu-latest
@@ -46,7 +48,9 @@ jobs:
         env:
           application_id: ${{ secrets.APPLICATION_ID }}
           rest_key: ${{ secrets.REST_KEY }}
-        run: python main_crawler_yundailifree.py
+          target: 'yundaili_free'
+          protocol: 'HTTP'
+        run: python main_crawler.py
   jiangxianli:
     name: Crawler Proxy Pool - Jiangxianli
     runs-on: ubuntu-latest
@@ -65,4 +69,6 @@ jobs:
         env:
           application_id: ${{ secrets.APPLICATION_ID }}
           rest_key: ${{ secrets.REST_KEY }}
-        run: python main_crawler_jiangxianli.py
+          target: 'jiangxianli'
+          protocol: 'HTTPS'
+        run: python main_crawler.py

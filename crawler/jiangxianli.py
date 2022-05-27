@@ -84,14 +84,18 @@ class JiangXianLi:
         proxy = None
         while True:
             html = None
+            count = 0
             while html is None:
                 if len(proxies) > 0:
                     proxy = random.sample(proxies, 1)[0]
                 html = self.get_html(proxy, page)
+                count += 1
                 if html is None:
                     logi(f'wait {self.interval} seconds, retry page num {page}')
                     time.sleep(self.interval)
-            if parse_and_verify(html):
+                if count > 3:
+                    break
+            if count > 3 or parse_and_verify(html):
                 break
 
             page += 1

@@ -77,9 +77,10 @@ def verify_ip_validity(proxy: UseProxy) -> bool:
             return False
         if json.loads(content)['origin'].find(',') == -1:
             proxy.anonymity = '匿名'
+            return True
         else:
             proxy.anonymity = '透明'
-        return True
+            return False
     except Exception as ex:
         loge(ex)
         return False

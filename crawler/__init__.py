@@ -9,8 +9,9 @@ Time: 2022/3/6 12:56
 version: 1.0
 """
 
-__all__ = ['JiangXianLi', 'YunDaiLi', 'YunDaiLiFree']
+__all__ = ['JiangXianLi', 'YunDaiLi', 'YunDaiLiFree', 'FateZero']
 
 from crawler.jiangxianli import JiangXianLi
 from crawler.yundaili import YunDaiLi
 from crawler.yundaili_free import YunDaiLiFree
+from crawler.fatezero import FateZero

@@ -39,7 +39,7 @@ def delete_proxy(proxy:UseProxy) -> None:
     logi(data)
     if data and len(data) > 0:
         proxy.score = data[0]['score'] - 1
-        if proxy.score > 0:
+        if proxy.score > 80:
             bmob.update(classname, data[0]['objectId'], proxy.dict())
         else:
             bmob.remove(classname, data[0]['objectId'])
