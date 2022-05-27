@@ -63,4 +63,4 @@ def find_proxy(proxy:UseProxy = None) -> List[UseProxy]:
 def is_valided_proxy(proxy:UseProxy = None) -> bool:
     res = bmob.find(classname, where=proxy.dict_ip_and_port())
     data = res.jsonData.get('results')
-    return False if not data and len(data) > 0 else True
+    return False if data and len(data) > 0 else True
