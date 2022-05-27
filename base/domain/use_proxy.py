@@ -28,6 +28,17 @@ class UseProxy:
             'score': self.score
         }
 
+    def dict_ip_and_port(self):
+        return {
+            'ip': self.ip,
+            'port': self.port
+        }
+
+    def dict_protocol(self):
+        return {
+            'protocol': self.protocol
+        }
+
     def __str__(self):
         return f'{self.ip}:{self.port}'
 

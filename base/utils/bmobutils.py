@@ -22,7 +22,7 @@ classname = 'use_proxy'
 
 
 def add_proxy(proxy:UseProxy) -> None:
-    res = bmob.find(classname, where=proxy.dict())
+    res = bmob.find(classname, where=proxy.dict_ip_and_port())
     data = res.jsonData.get('results')
     logi(data)
     if not data or len(data) == 0:
@@ -34,10 +34,10 @@ def add_proxy(proxy:UseProxy) -> None:
 
 
 def delete_proxy(proxy:UseProxy) -> None:
-    res = bmob.find(classname, where=proxy.dict())
+    res = bmob.find(classname, where=proxy.dict_ip_and_port())
     data = res.jsonData.get('results')
     logi(data)
-    if not data or len(data) > 0:
+    if not data and len(data) > 0:
         proxy.score = data[0]['score'] - 1
         if proxy.score > 0:
             bmob.update(classname, data[0]['objectId'], proxy.dict())
@@ -47,7 +47,7 @@ def delete_proxy(proxy:UseProxy) -> None:
 
 def find_proxy(proxy:UseProxy = None) -> List[UseProxy]:
     if proxy:
-        res = bmob.find(classname, where=proxy)
+        res = bmob.find(classname, where=proxy.dict_protocol())
     else:
         res = bmob.find(classname)
     data = res.jsonData.get('results')
@@ -55,12 +55,12 @@ def find_proxy(proxy:UseProxy = None) -> List[UseProxy]:
     if not data:
         return proxy_list
     for d in data:
-        proxy = UseProxy(d['ip'], d['port'], d['protocol'], d['anonymity'])
+        proxy = UseProxy(d['ip'], d['port'], d['protocol'], d['anonymity'], d['score'])
         proxy_list.append(proxy)
     return proxy_list
 
 
 def is_valided_proxy(proxy:UseProxy = None) -> bool:
-    res = bmob.find(classname, where=proxy.dict())
+    res = bmob.find(classname, where=proxy.dict_ip_and_port())
     data = res.jsonData.get('results')
     return False if not data and len(data) > 0 else True
