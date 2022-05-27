@@ -37,7 +37,7 @@ def delete_proxy(proxy:UseProxy) -> None:
     res = bmob.find(classname, where=proxy.dict_ip_and_port())
     data = res.jsonData.get('results')
     logi(data)
-    if not data and len(data) > 0:
+    if data and len(data) > 0:
         proxy.score = data[0]['score'] - 1
         if proxy.score > 0:
             bmob.update(classname, data[0]['objectId'], proxy.dict())
