@@ -14,6 +14,4 @@ from crawler import *
 proxy = UseProxy(protocol='HTTPS')
 proxies = find_proxy(proxy)
 
-# YunDaiLiFree().crawler(proxies)
-# YunDaiLi().crawler(proxies)
 JiangXianLi().crawler(proxies)

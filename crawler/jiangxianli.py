@@ -83,10 +83,10 @@ class JiangXianLi:
         logi(f'start page num {page}')
         proxy = None
         while True:
-            if len(proxies) > 0:
-                proxy = random.sample(proxies, 1)[0]
             html = None
             while html is None:
+                if len(proxies) > 0:
+                    proxy = random.sample(proxies, 1)[0]
                 html = self.get_html(proxy, page)
                 if html is None:
                     logi(f'wait {self.interval} seconds, retry page num {page}')
