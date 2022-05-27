@@ -44,11 +44,10 @@ def parse_and_verify(html: str) -> None:
 
 
 class YunDaiLiFree:
-
-    url = 'http://www.ip3366.net/free'
+    url = 'http://www.ip3366.net/free/?stype={stype}&page=1'
     interval = 5
 
-    def get_html(self, proxy: UseProxy | None) -> str | None:
+    def get_html(self, proxy: UseProxy | None, stype: int) -> str | None:
         """
         get html source code
         :param proxy: proxy ip
@@ -60,7 +59,7 @@ class YunDaiLiFree:
             logi(proxy.proxies())
             proxies = proxy.proxies()
         try:
-            return get('http', url=self.url, proxies=proxies).content.decode('gb2312')
+            return get('http', url=self.url.format(stype=stype), proxies=proxies).content.decode('gb2312')
         except Exception as ex:
             loge(ex)
             pass
@@ -73,11 +72,18 @@ class YunDaiLiFree:
         """
         proxy = None
         html = None
-        while html is None:
-            if len(proxies) > 0:
-                proxy = random.sample(proxies, 1)[0]
-            html = self.get_html(proxy)
-            if html is None:
-                logi(f'wait {self.interval} seconds, retry ...')
-                time.sleep(self.interval)
-        parse_and_verify(html)
+        for stype in range(1, 6):
+            count = 0
+            while html is None:
+                if len(proxies) > 0:
+                    proxy = random.sample(proxies, 1)[0]
+                html = self.get_html(proxy, stype)
+                count += 1
+                if html is None:
+                    logi(f'wait {self.interval} seconds, retry ...')
+                    time.sleep(self.interval)
+                if count > 3:
+                    break
+            parse_and_verify(html)
+            logi(f'wait {self.interval} seconds, start stype num {stype}')
+            time.sleep(self.interval)

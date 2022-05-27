@@ -1,0 +1,32 @@
+name: Crawler Proxy Pool (Quarter)
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - release
+  schedule:
+    - cron: '0,15,30,45 * * * *'
+
+jobs:
+  fatezero:
+    name: Crawler Proxy Pool - FateZero
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ secrets.BRANCH }}
+      - name: Setup python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+      - name: Install Packages
+        run: pip install -r requirements.txt
+      - name: Run Script
+        env:
+          application_id: ${{ secrets.APPLICATION_ID }}
+          rest_key: ${{ secrets.REST_KEY }}
+          target: 'fatezero'
+          protocol: 'HTTP'
+        run: python main_crawler.py

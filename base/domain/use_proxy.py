@@ -23,7 +23,7 @@ class UseProxy:
         return {
             'ip': self.ip,
             'port': self.port,
-            'protocol': self.protocol,
+            'protocol': self.protocol.upper(),
             'anonymity': self.anonymity,
             'score': self.score
         }
