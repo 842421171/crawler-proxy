@@ -28,6 +28,8 @@ def parse_and_verify(html: str) -> bool | None:
     if not len(data):
         return True
 
+    data.pop(len(data) - 1)
+
     for d in data:
         d = eval(d)
         proxy = UseProxy(d['host'], d['port'], d['type'])

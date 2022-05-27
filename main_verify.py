@@ -15,10 +15,13 @@ proxies = find_proxy()
 use_proxy_list = []
 
 for proxy in proxies:
+    logi(f'{proxy.dict()} 开始验证')
     if verify_ip_validity(proxy):
+        logi(f'{proxy.dict()} 验证通过')
         add_proxy(proxy)
         use_proxy_list.append(proxy)
     else:
+        logi(f'{proxy.dict()} 验证失败')
         delete_proxy(proxy)
-
+        
 print(use_proxy_list)
