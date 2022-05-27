@@ -26,8 +26,10 @@ def add_proxy(proxy:UseProxy) -> None:
     data = res.jsonData.get('results')
     logi(data)
     if not data or len(data) == 0:
+        proxy.score = 100
         bmob.insert(classname, proxy.dict())
     else:
+        proxy.score = data[0]['score']
         bmob.update(classname, data[0]['objectId'], proxy.dict())
 
 
@@ -36,7 +38,11 @@ def delete_proxy(proxy:UseProxy) -> None:
     data = res.jsonData.get('results')
     logi(data)
     if not data or len(data) > 0:
-        bmob.remove(classname, data[0]['objectId'])
+        proxy.score = data[0]['score'] - 1
+        if proxy.score > 0:
+            bmob.update(classname, data[0]['objectId'], proxy.dict())
+        else:
+            bmob.remove(classname, data[0]['objectId'])
 
 
 def find_proxy(proxy:UseProxy = None) -> List[UseProxy]:
@@ -52,5 +58,11 @@ def find_proxy(proxy:UseProxy = None) -> List[UseProxy]:
         proxy = UseProxy(d['ip'], d['port'], d['protocol'], d['anonymity'])
         proxy_list.append(proxy)
     return proxy_list
+
+
+def is_valided_proxy(proxy:UseProxy = None) -> bool:
+    res = bmob.find(classname, where=proxy)
+    data = res.jsonData.get('results')
+    return False if not data or len(data) > 0 else True
 
 # 103.152.232.172:8080

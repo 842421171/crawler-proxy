@@ -12,7 +12,7 @@ version: 1.0
 __all__ = ['UseProxy',
            'get',
            'logd', 'logi', 'logw', 'loge',
-           'Bmob', 'add_proxy', 'delete_proxy', 'find_proxy']
+           'Bmob', 'add_proxy', 'delete_proxy', 'find_proxy', 'is_valided_proxy']
 
 from base.domain import *
 from base.third import *

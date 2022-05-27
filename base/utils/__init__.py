@@ -11,7 +11,7 @@ version: 1.0
 
 __all__ = ['get',
            'logd', 'logi', 'logw', 'loge',
-           'add_proxy', 'delete_proxy', 'find_proxy']
+           'add_proxy', 'delete_proxy', 'find_proxy', 'is_valided_proxy']
 
 from base.utils.requestsutil import get
 from base.utils.log import *

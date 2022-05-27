@@ -17,13 +17,15 @@ class UseProxy:
     port = attr(type=str, default=None)
     protocol = attr(type=str, default=None)
     anonymity = attr(type=str, default=None)
+    score = attr(type=int, default=None)
 
     def dict(self):
         return {
             'ip': self.ip,
             'port': self.port,
             'protocol': self.protocol,
-            'anonymity': self.anonymity
+            'anonymity': self.anonymity,
+            'score': self.score
         }
 
     def __str__(self):

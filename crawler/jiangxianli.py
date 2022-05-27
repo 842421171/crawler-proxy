@@ -45,7 +45,7 @@ def parse_and_verify(html: str) -> bool | None:
     for ip, port, protocol_type in zip(ips, ports, protocol_types):
         proxy = UseProxy(ip, port, protocol_type)
         logi(f'{proxy.dict()} 开始验证')
-        if verify_ip_validity(proxy):
+        if is_valided_proxy(proxy) and verify_ip_validity(proxy):
             logi(f'{proxy.dict()} 验证通过')
             add_proxy(proxy)
         else:
