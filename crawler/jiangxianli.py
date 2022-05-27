@@ -95,7 +95,7 @@ class JiangXianLi:
                     time.sleep(self.interval)
                 if count > 3:
                     break
-            if parse_and_verify(html):
+            if count > 3 or parse_and_verify(html):
                 break
 
             page += 1
