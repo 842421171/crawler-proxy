@@ -6,7 +6,7 @@ on:
     branches:
       - release
   schedule:
-    - cron: '0,30 * * * *'
+    - cron: '* 1 * * *'
 
 jobs:
   run:
