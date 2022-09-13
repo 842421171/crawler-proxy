@@ -136,7 +136,7 @@ class BmobQuerier:
 		if maxRadians != None:
 			near["$maxDistanceInRadians"] = maxRadians
 		return self.putWhereFilter(key, near)
-	def addWhereWithinGeoBox(self, key, southwest, northeast):
+	def addWhereWithinGeoBox(self, southwest, northeast):
 		return self.putWhereFilter(key, {"$box": [southwest.__dict__, northeast.__dict__]}, "$within")
 	# 列表
 	def addWhereContainedIn(self, key, value, isIn = True):
@@ -248,7 +248,7 @@ def httpRequest(url, method = 'GET', headers = None, body = None, timeout = 10):
 
 class Bmob:
 	def __init__(self, appid, restkey):
-		self.domain = 'https://api2.bmob.cn'
+		self.domain = 'https://api2.bmobapp.com'
 		self.headers = {"X-Bmob-Application-Id": appid, "X-Bmob-REST-API-Key": restkey, "Content-Type": "application/json"}
 		self.appid = appid
 		self.restkey = restkey
